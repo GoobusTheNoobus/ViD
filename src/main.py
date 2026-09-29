@@ -12,9 +12,14 @@
 # ViD is licensed under the MIT License. All rights reserved.
 
 import ansi
+import sys
 
 def main() -> None:
-    ansi.clear_terminal()
+    arguments = sys.argv[1:]
+
+    if len(arguments) == 0:
+        print("Missing input file! Usage: vid <filename>")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
