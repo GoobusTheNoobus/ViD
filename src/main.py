@@ -11,8 +11,10 @@
 #
 # ViD is licensed under the MIT License. All rights reserved.
 
+import ansi
+
 def main() -> None:
-    print("ViD")
+    ansi.clear_terminal()
 
 if __name__ == "__main__":
     main()
