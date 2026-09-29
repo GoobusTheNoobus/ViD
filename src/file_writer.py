@@ -1,3 +1,17 @@
+# =====================================================================
+#
+#                        __     ___ ____
+#                        \ \   / (_)  _ \
+#                         \ \ / /| | | | |
+#                          \ V / | | |_| |
+#                           \_/  |_|____/
+#
+#
+# =====================================================================
+#
+# ViD is licensed under the MIT License. All rights reserved.
+
+
 def write_to_file(file_path : str, contents : str) -> void: # Please only pass raw strings to this function
     with open(file_path, 'w') as f:
         f.write(contents)
