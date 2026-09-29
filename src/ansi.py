@@ -36,4 +36,3 @@ def clear_terminal() -> None:
     print('\033[2J\033[H\0333', end='')
 
 
-
