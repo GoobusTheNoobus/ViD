@@ -15,11 +15,15 @@ import ansi
 import sys
 
 def main() -> None:
-    arguments = sys.argv[1:]
 
-    if len(arguments) == 0:
+    if len(sys.argv) == 1:
         print("Missing input file! Usage: vid <filename>")
         sys.exit(1)
+
+    if (len(sys.argv) >= 3):
+        print("Too many arguments! Usage: vid <filename>")
+
+    file_path = sys.argv[1]
 
 if __name__ == "__main__":
     main()
