@@ -39,6 +39,8 @@ def main(window: curses.window) -> None:
 
         key = window.getch()
 
+        # navigation
+
         if key == key_input.ESC:
             return
 

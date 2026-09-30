@@ -12,6 +12,14 @@
 # ViD is licensed under the MIT License. All rights reserved.
 
 class Editor:
+    """
+
+    :var lines: the text displayed, split by new-lines
+    :var cursor_x: column index of the cursor
+    :var cursor_y: line index of the cursor
+    :var file_path: the path to the file the editor is emulating
+    """
+
     def __init__(self) -> None:
         self.lines = [""]
         self.cursor_x = 0

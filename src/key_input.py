@@ -14,10 +14,21 @@
 import curses
 
 def _ctrl_code(char: str) -> int:
+    """Gets the curses key id of the ctrl+sequence
+
+    :param char: the keypress alongside ctrl
+    :return: the id of the sequence
+    """
+
     assert len(char) == 1
     return ord(char.upper()) - ord('@')
 
 def decode_key(key: int) -> str | None:
+    """Turns a curses key id into a character
+
+    :param key: the curses id
+    :return: the character
+    """
 
     if 0 <= key <= 255:
         return chr(key) # normal character keys

@@ -11,10 +11,4 @@
 #
 # ViD is licensed under the MIT License. All rights reserved.
 
-from renderer import Renderer
-
-class Menu:
-    def __init__(self, text: str):
-        self.text = text
-
-# TODO: write the class
+VERSION = "0.1.0"
