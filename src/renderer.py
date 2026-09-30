@@ -11,7 +11,11 @@
 #
 # ViD is licensed under the MIT License. All rights reserved.
 
+# The renderer is the module that will perform all rendering.
+
 import curses
+from typing import overload
+
 
 from editor import Editor
 
@@ -43,3 +47,11 @@ class Renderer:
 
         self.window.move(editor.cursor_y, editor.cursor_x + 2 + num_length)
         self.window.refresh()
+    
+    def clearscreen(self):
+        self.window.erase()
+        self.window.refresh()
+    
+    @overload
+    def render(self, text : str) -> void:
+        self.window.addstr(text)
