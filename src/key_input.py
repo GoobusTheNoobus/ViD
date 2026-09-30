@@ -30,7 +30,7 @@ CTRL_T = _ctrl_code('t')
 
 ESC = 27
 
-LEFT = curses.KEY_LEFT
+LEFT  = curses.KEY_LEFT
 RIGHT = curses.KEY_RIGHT
-UP = curses.KEY_UP
-DOWN = curses.KEY_DOWN
+UP    = curses.KEY_UP
+DOWN  = curses.KEY_DOWN

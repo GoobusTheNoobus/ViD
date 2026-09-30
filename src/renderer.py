@@ -12,6 +12,7 @@
 # ViD is licensed under the MIT License. All rights reserved.
 
 import curses
+import colour
 
 from editor import Editor
 
@@ -19,9 +20,9 @@ class Renderer:
     def __init__(self, window : curses.window):
         self.window = window
         self.theme = {
-            'background': curses.COLOR_BLACK,
-            'foreground': curses.COLOR_WHITE,
-            'line_number': curses.COLOR_GREEN
+            'background': colour.BLACK,
+            'foreground': colour.WHITE,
+            'line_number': colour.DARK_GRAY
         }
 
         curses.init_pair(1, self.theme['foreground'], self.theme['background'])
