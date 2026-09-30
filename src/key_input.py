@@ -27,7 +27,7 @@ CTRL_Q = _ctrl_code('q')
 CTRL_C = _ctrl_code('c')
 CTRL_V = _ctrl_code('v')
 
-ESC = _ctrl_code('\x1b')
+ESC = 27
 
 LEFT = curses.KEY_LEFT
 RIGHT = curses.KEY_RIGHT

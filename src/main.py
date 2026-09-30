@@ -17,24 +17,42 @@ import file_handler
 import key_input
 
 from editor import Editor
+from renderer import Renderer
+
 
 def main(window: curses.window) -> None:
-    window.keypad(True)
 
-    window.addstr(0, 0, "Press a key...")
-    window.refresh()
+    file_path = sys.argv[1] if len(sys.argv) >= 1 else ''
 
-    key = window.getch()
+    # attempt to read file
+    file_contents = file_handler.read(file_path)
 
-    window.clear()
-    window.addstr(0, 0, f"Key code: {key}")
-    window.refresh()
+    editor = Editor()
+    renderer = Renderer(window)
 
-    if key == key_input.ESC:
-        return
+    editor.load(file_contents)
 
-    window.getch()
+    while True:
+        renderer.render(editor)
+
+        key = window.getch()
+
+        if key == key_input.ESC:
+            return
+
+        elif key == key_input.UP:
+            editor.up()
+
+        elif key == key_input.DOWN:
+            editor.down()
+
+        elif key == key_input.LEFT:
+            editor.left()
+
+        elif key == key_input.RIGHT:
+            editor.right()
 
 
 if __name__ == "__main__":
+    curses.set_escdelay(25)
     curses.wrapper(main)

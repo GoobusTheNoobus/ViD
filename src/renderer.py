@@ -11,14 +11,19 @@
 #
 # ViD is licensed under the MIT License. All rights reserved.
 
-def write(file_path : str, contents : str) -> None: # Please only pass raw strings to this function
-    with open(file_path, 'w') as f:
-        f.write(contents)
+import curses
 
+from editor import Editor
 
-def read(file_path : str) -> str | None: # Please only pass raw strings to this function
-    try:
-        with open(file_path) as f:
-            return f.read()
-    except FileNotFoundError:
-        return None
+class Renderer:
+    def __init__(self, window : curses.window):
+        self.window = window
+
+    def render(self, editor : Editor):
+        self.window.erase()
+
+        for y, line in enumerate(editor.lines):
+            self.window.addstr(y, 0, line)
+
+        self.window.move(editor.cursor_y, editor.cursor_x)
+        self.window.refresh()
