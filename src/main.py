@@ -22,7 +22,7 @@ from renderer import Renderer
 
 def main(window: curses.window) -> None:
 
-    file_path = sys.argv[1] if len(sys.argv) >= 1 else ''
+    file_path = sys.argv[1] if len(sys.argv) > 1 else ''
 
     # attempt to read file
     file_contents = file_handler.read(file_path)
