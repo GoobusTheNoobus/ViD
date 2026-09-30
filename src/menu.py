@@ -1,8 +1,5 @@
 from renderer import Renderer
 
 class Menu:
-    def __init__():
-        pass
-    
-    def create_menu(options : list[str]) -> int:
-        return ""
+    def __init__(self, text: str):
+        self.text = text
