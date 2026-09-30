@@ -44,3 +44,10 @@ class Renderer:
 
         self.window.move(editor.cursor_y, editor.cursor_x + 2 + num_length)
         self.window.refresh()
+
+    def clearscreen(self):
+        self.window.erase()
+        self.window.refresh()
+    
+    def render_text(self, text : str) -> None:
+        self.window.addstr(text)
