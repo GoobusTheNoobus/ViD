@@ -12,29 +12,24 @@
 # ViD is licensed under the MIT License. All rights reserved.
 
 import curses
-import sys
-import file_handler
-import key_input
 
-from editor import Editor
+def _ctrl_code(char: str) -> int:
+    assert len(char) == 1
+    return ord(char.upper()) - ord('@')
 
-def main(window: curses.window) -> None:
-    window.keypad(True)
+def decode_key(key: int) -> str | None:
 
-    window.addstr(0, 0, "Press a key...")
-    window.refresh()
+    if 0 <= key <= 255:
+        return chr(key) # normal character keys
+    return None
 
-    key = window.getch()
+CTRL_Q = _ctrl_code('q')
+CTRL_C = _ctrl_code('c')
+CTRL_V = _ctrl_code('v')
 
-    window.clear()
-    window.addstr(0, 0, f"Key code: {key}")
-    window.refresh()
+ESC = _ctrl_code('\x1b')
 
-    if key == key_input.ESC:
-        return
-
-    window.getch()
-
-
-if __name__ == "__main__":
-    curses.wrapper(main)
+LEFT = curses.KEY_LEFT
+RIGHT = curses.KEY_RIGHT
+UP = curses.KEY_UP
+DOWN = curses.KEY_DOWN
