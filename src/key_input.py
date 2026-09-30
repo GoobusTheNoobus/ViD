@@ -26,6 +26,7 @@ def decode_key(key: int) -> str | None:
 CTRL_Q = _ctrl_code('q')
 CTRL_C = _ctrl_code('c')
 CTRL_V = _ctrl_code('v')
+CTRL_T = _ctrl_code('t')
 
 ESC = 27
 

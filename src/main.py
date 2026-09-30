@@ -31,6 +31,8 @@ def main(window: curses.window) -> None:
     renderer = Renderer(window)
 
     editor.load(file_contents)
+    
+    curses.start_color()
 
     while True:
         renderer.render(editor)
@@ -54,5 +56,7 @@ def main(window: curses.window) -> None:
 
 
 if __name__ == "__main__":
+    # we run some setups
     curses.set_escdelay(25)
+    
     curses.wrapper(main)
