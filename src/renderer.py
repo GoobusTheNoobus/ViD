@@ -22,14 +22,21 @@ class Renderer:
         self.theme = {
             'background': colour.BLACK,
             'foreground': colour.WHITE,
-            'line_number': colour.DARK_GRAY
+            'line_number': colour.DARK_GRAY,
+            'selected_line_number': colour.LIGHT_GRAY,
         }
 
         curses.init_pair(1, self.theme['foreground'], self.theme['background'])
         curses.init_pair(2, self.theme['line_number'], self.theme['background'])
+        curses.init_pair(3, self.theme['selected_line_number'], self.theme['background'])
 
     def render(self, editor : Editor):
         self.window.erase()
+
+        try:
+            curses.curs_set(0)
+        except curses.error:
+            pass
 
         num_length = len(str(len(editor.lines)))
         self.window.bkgd(' ', curses.color_pair(1))
@@ -38,11 +45,19 @@ class Renderer:
             line_num = str(y + 1)
             extra_spaces = ' ' * (num_length - len(line_num))
 
-            self.window.addstr(y, 0, ' ' + extra_spaces + line_num + ' ', curses.color_pair(2))
+            self.window.addstr(y, 0, ' ' + extra_spaces + line_num + ' ', 
+                curses.color_pair(
+                    2 if y != editor.cursor_y else 3)) # if the current line is selected, show different colour
 
             self.window.addstr(y, 2 + len(line_num) + len(extra_spaces), line, curses.color_pair(1))
 
         self.window.move(editor.cursor_y, editor.cursor_x + 2 + num_length)
+
+        try:
+            curses.curs_set(1)
+        except curses.error:
+            pass
+            
         self.window.refresh()
 
     def clearscreen(self):
