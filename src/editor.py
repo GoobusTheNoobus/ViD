@@ -11,6 +11,9 @@
 #
 # ViD is licensed under the MIT License. All rights reserved.
 
+import file_handler
+
+
 class Editor:
     """
 
@@ -21,14 +24,19 @@ class Editor:
     """
 
     def __init__(self) -> None:
-        self.lines = [""]
+        self.lines = ['']
+        self.file_path = ''
         self.cursor_x = 0
         self.cursor_y = 0
 
-    def load(self, text: str | None) -> None:
+    def load(self, file_path : str) -> None:
+
+        text = file_handler.read(file_path)
+
         if not text:
             return
 
+        self.file_path = file_path
         self.lines = text.split("\n")
 
     def up(self) -> None:

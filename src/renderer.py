@@ -29,13 +29,19 @@ class Renderer:
         self.theme = {
             'background': colour.BLACK,
             'foreground': colour.WHITE,
-            'line_number': colour.DARK_GRAY,
-            'selected_line_number': colour.LIGHT_GRAY,
 
-            'status_bg': colour.LIGHT_GRAY,
-            'status_fg': colour.DARK_GRAY,
-            'status_vid_name': colour.MAGENTA
+            'line_number': colour.GREEN,
+            'selected_line_number': colour.WHITE,
+
+            'status_bg': colour.DARK_GRAY,
+            'status_fg': colour.WHITE,
+            'status_vid_bg': colour.MAGENTA,
         }
+
+        try:
+            curses.curs_set(1)
+        except curses.error:
+            pass
 
         # initialize the colour schemes
         curses.init_pair(1, self.theme['foreground'], self.theme['background'])
@@ -43,7 +49,7 @@ class Renderer:
         curses.init_pair(3, self.theme['selected_line_number'], self.theme['background'])
 
         curses.init_pair(4, self.theme['status_fg'], self.theme['status_bg'])
-        curses.init_pair(5, self.theme['status_vid_name'], self.theme['status_bg'])
+        curses.init_pair(5, self.theme['status_fg'], self.theme['status_vid_bg'])
 
     def render(self, editor : Editor):
         self.window.erase()
@@ -52,11 +58,6 @@ class Renderer:
 
         # reserve the last row for status bar
         editor_height = height - 1
-
-        try:
-            curses.curs_set(0)
-        except curses.error:
-            pass
 
         num_length = len(str(len(editor.lines)))
         self.window.bkgd(' ', curses.color_pair(1))
@@ -70,20 +71,18 @@ class Renderer:
 
             self.window.addstr(y, 0, ' ' + extra_spaces + line_num + ' ', 
                 curses.color_pair(
-                    2 if y != editor.cursor_y else 3)) # if the current line is selected, show different colour
+                    2 if y != editor.cursor_y else 3) | curses.A_BOLD) # if the current line is selected, show different colour
 
             self.window.addstr(y, 2 + len(line_num) + len(extra_spaces), line, curses.color_pair(1))
 
-        text = f" ViDisimproved {VERSION}"
+        vid_text = f" VID {VERSION}  "
+        vid_text_len = len(vid_text)
 
-        self.window.addstr(editor_height, 0, text.ljust(width - 1), curses.color_pair(4))
+        self.window.addstr(editor_height, 0, vid_text, curses.color_pair(5) | curses.A_BOLD)
+        self.window.addstr(editor_height, vid_text_len, '  ' + editor.file_path + ' ' * (width - vid_text_len -
+            len(editor.file_path) - 3), curses.color_pair(4))
 
         self.window.move(editor.cursor_y, editor.cursor_x + 2 + num_length)
-
-        try:
-            curses.curs_set(1)
-        except curses.error:
-            pass
             
         self.window.refresh()
 

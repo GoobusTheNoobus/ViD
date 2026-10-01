@@ -24,13 +24,10 @@ def main(window: curses.window) -> None:
 
     file_path = sys.argv[1] if len(sys.argv) > 1 else ''
 
-    # attempt to read file
-    file_contents = file_handler.read(file_path)
-
     editor = Editor()
     renderer = Renderer(window)
 
-    editor.load(file_contents)
+    editor.load(file_path)
     
     curses.start_color()
 
