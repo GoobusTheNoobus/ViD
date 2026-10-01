@@ -19,9 +19,6 @@ import key_input
 from editor import Editor
 from renderer import Renderer
 
-print(key_input.BACKSPACE)
-input()
-
 def main(window: curses.window) -> None:
 
     file_path = sys.argv[1] if len(sys.argv) > 1 else ''
@@ -30,17 +27,12 @@ def main(window: curses.window) -> None:
     renderer = Renderer(window)
 
     editor.load(file_path)
-    
     curses.start_color()
 
     while True:
         renderer.render(editor)
 
         key = window.getch()
-
-
-
-
 
         # navigation
 
