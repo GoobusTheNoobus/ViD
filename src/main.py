@@ -19,6 +19,8 @@ import key_input
 from editor import Editor
 from renderer import Renderer
 
+print(key_input.BACKSPACE)
+input()
 
 def main(window: curses.window) -> None:
 

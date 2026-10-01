@@ -1,6 +1,6 @@
 # this file is for testing if the text renders on the screen.
 
-x : float = 67
+x : float = 67 
 
 x = 6.67 # goobus will never see this coming -- evil goobus from alternate universe, using vid to edit this
 

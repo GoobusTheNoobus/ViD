@@ -36,5 +36,5 @@ RIGHT = curses.KEY_RIGHT
 UP    = curses.KEY_UP
 DOWN  = curses.KEY_DOWN
 
-BACKSPACE       = curses.KEY_BACKSPACE
+BACKSPACE       = 127
 ENTER           = 10
