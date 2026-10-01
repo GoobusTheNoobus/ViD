@@ -51,7 +51,13 @@ class Renderer:
         curses.init_pair(4, self.theme['status_fg'], self.theme['status_bg'])
         curses.init_pair(5, self.theme['status_fg'], self.theme['status_vid_bg'])
 
-    def render(self, editor : Editor):
+    def render(self, editor : Editor) -> None:
+        """Renders an editor on the screen
+
+        :param editor:
+        :return: Nothing
+        """
+
         self.window.erase()
 
         height, width = self.window.getmaxyx()
@@ -89,6 +95,4 @@ class Renderer:
     def clearscreen(self):
         self.window.erase()
         self.window.refresh()
-    
-    def render_text(self, text : str) -> None:
-        self.window.addstr(text)
+

@@ -36,6 +36,10 @@ def main(window: curses.window) -> None:
 
         key = window.getch()
 
+
+
+
+
         # navigation
 
         if key == key_input.ESC:
@@ -52,6 +56,18 @@ def main(window: curses.window) -> None:
 
         elif key == key_input.RIGHT:
             editor.right()
+
+        elif key == key_input.ENTER:
+            editor.insert_newline()
+
+        elif key == key_input.BACKSPACE:
+            editor.backspace()
+
+        elif key == key_input.CTRL_O:
+            editor.save()
+
+        elif 32 <= key <= 126:
+            editor.insert(chr(key))
 
 
 if __name__ == "__main__":

@@ -39,6 +39,61 @@ class Editor:
         self.file_path = file_path
         self.lines = text.split("\n")
 
+    def save(self) -> None:
+
+        text = ''
+        for i, line in enumerate(self.lines):
+            text += line
+            if i != len(self.lines) - 1:
+                text += '\n'
+
+        success = file_handler.write(self.file_path, text)
+
+        if not success:
+            pass # TODO: raise error menu
+
+    def insert(self, char: str):
+        assert len(char) == 1
+
+        line = self.lines[self.cursor_y]
+
+        self.lines[self.cursor_y] = line[:self.cursor_x] + char + line[self.cursor_x:]
+
+        self.cursor_x += 1
+
+    def insert_newline(self):
+
+        line = self.lines[self.cursor_y]
+
+        before_cursor = line[:self.cursor_x]
+        after_cursor = line[self.cursor_x:]
+
+        self.lines[self.cursor_y] = before_cursor
+        self.lines.insert(self.cursor_y + 1, after_cursor)
+
+        self.cursor_y += 1
+        self.cursor_x = 0
+
+    def backspace(self):
+
+        if self.cursor_x > 0:
+            line = self.lines[self.cursor_y]
+
+            self.lines[self.cursor_y] = line[:self.cursor_x - 1] + line[self.cursor_x:]
+
+            self.cursor_x -= 1
+
+        elif self.cursor_y > 0:
+            previous_line = self.lines[self.cursor_y - 1]
+            current_line = self.lines[self.cursor_y]
+
+            self.cursor_x = len(previous_line)
+
+            self.lines[self.cursor_y - 1] = previous_line + current_line
+            self.lines.pop(self.cursor_y)
+
+            self.cursor_y -= 1
+
     def up(self) -> None:
         self.cursor_y = max(0, self.cursor_y - 1)
 
